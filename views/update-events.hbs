@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Update Event</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Update Event</h2>
+        
+       
+        <form action="/admin/admin-dashboard/update/{{responce._id}}" method="POST">
+            <!-- Event Name -->
+            <div class="form-group">
+                <label for="eventName">Event Name</label>
+                <input type="text" class="form-control" id="eventName" name="eventName" value="{{responce.eventName}}" placeholder="Event Name">
+            </div>
+
+            <!-- Event Description -->
+            <div class="form-group">
+                <label for="eventDescription">Event Description</label>
+                <textarea class="form-control" id="eventDescription" name="eventDescription"  rows="3" placeholder="Event Description">{{responce.eventDescription}}</textarea>
+            </div>
+
+            <!-- Society Name -->
+            <div class="form-group">
+                <label for="societyName">Society Name</label>
+                <input type="text" class="form-control" id="societyName" name="societyName" value="{{responce.societyName}}" placeholder="Society Name">
+            </div>
+
+            <!-- Event Date -->
+            <div class="form-group">
+                <label for="eventDate">Event Date</label>
+                <input type="date" class="form-control" id="eventDate" value="{{responce.eventDate}}" name="eventDate">
+            </div>
+
+            <!-- Event Time -->
+            <div class="form-group">
+                <label for="eventTime">Event Time</label>
+                <input type="time" class="form-control" id="eventTime" value="{{responce.eventTime}}" name="eventTime">
+            </div>
+
+            <!-- Event Type -->
+            <div class="form-group">
+                <label>Event Type</label><br>
+
+                {{#isEqual responce.eventType "online"}}
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="eventType" id="onlineEvent" value="online"checked required >
+                    <label class="form-check-label" for="onlineEvent">Online</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="eventType" id="offlineEvent" value="offline" required>
+                    <label class="form-check-label" for="offlineEvent">Offline</label>
+                </div>
+                {{else}}
+                 <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="eventType" id="onlineEvent" value="online" required >
+                    <label class="form-check-label" for="onlineEvent">Online</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="eventType" id="offlineEvent" value="offline" checked required>
+                    <label class="form-check-label" for="offlineEvent">Offline</label>
+                 </div>
+
+              
+            {{/isEqual}}
+
+
+            <!-- Venue -->
+            
+
+              <div class="form-group" id="venueField" >
+                <label for="venue">Venue</label>
+                <input type="text" class="form-control" value="{{responce.venue}}" id="venue" name="venue" placeholder="Enter Venue">
+                 </div>
+
+
+
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+      
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+        <script>
+        // Show/hide venue field based on event type selection
+        $('input[name="eventType"]').change(function() {
+            if ($(this).val() === 'offline') {
+                $('#venueField').show();
+            } else {
+                $('#venueField').hide();
+            }
+        });
+    </script>
+</body>
+</html>
